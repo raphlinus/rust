@@ -311,6 +311,7 @@ case $CFG_OSTYPE in
         then
             CFG_CPUTYPE=x86_64
         fi
+        ;;
 
     MSYS*)
         CFG_OSTYPE=pc-windows-gnu
