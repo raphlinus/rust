@@ -47,6 +47,9 @@ pub fn cc2ar(cc: &Path, target: &str) -> Option<PathBuf> {
     } else {
         let parent = cc.parent().unwrap();
         let file = cc.file_name().unwrap().to_str().unwrap();
+        if file == "clang" {
+            return Some(parent.join("llvm-ar"));
+        }
         for suffix in &["gcc", "cc", "clang"] {
             if let Some(idx) = file.rfind(suffix) {
                 let mut file = file[..idx].to_owned();

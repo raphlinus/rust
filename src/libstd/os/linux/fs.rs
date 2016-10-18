@@ -10,12 +10,14 @@
 
 #![stable(feature = "metadata_ext", since = "1.1.0")]
 
+#[cfg(not(target_os = "fuchsia"))]
 use libc;
 
 use fs::Metadata;
 use sys_common::AsInner;
 
 #[allow(deprecated)]
+#[cfg(not(target_os = "fuchsia"))]
 use os::linux::raw;
 
 /// OS-specific extension methods for `fs::Metadata`
@@ -32,6 +34,7 @@ pub trait MetadataExt {
                        reason = "deprecated in favor of the accessor \
                                  methods of this trait")]
     #[allow(deprecated)]
+    #[cfg(not(target_os = "fuchsia"))]
     fn as_raw_stat(&self) -> &raw::stat;
 
     #[stable(feature = "metadata_ext2", since = "1.8.0")]
@@ -71,6 +74,7 @@ pub trait MetadataExt {
 #[stable(feature = "metadata_ext", since = "1.1.0")]
 impl MetadataExt for Metadata {
     #[allow(deprecated)]
+    #[cfg(not(target_os = "fuchsia"))]
     fn as_raw_stat(&self) -> &raw::stat {
         unsafe {
             &*(self.as_inner().as_inner() as *const libc::stat64

@@ -39,7 +39,8 @@ fn main() {
         target.contains("bitrig") ||
         target.contains("openbsd") ||
         target.contains("msvc") ||
-        target.contains("emscripten")
+        target.contains("emscripten") ||
+        target.contains("fuchsia")
     {
         println!("cargo:rustc-cfg=dummy_jemalloc");
         return;
